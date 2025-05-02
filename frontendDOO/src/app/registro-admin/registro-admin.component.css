@@ -73,7 +73,7 @@ button {
     justify-content: center; /* Centra horizontalmente */
     align-items: center;     /* Centra verticalmente */
     height: 100vh;
-    background-image: url('../../../public/ImagenPath.png');
+    background-image: url('Imagenes/ImagenPath.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -1,0 +1,68 @@
+.InicioSesion-container {
+    background-image: url('Imagenes/ImagenPath.png'); /* Usa el mismo fondo que en registro */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-box {
+    background-color: rgba(255, 87, 34, 0.9); /* mismo color naranja translúcido */
+    padding: 30px;
+    border-radius: 8px;
+    width: 320px;
+    box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3);
+    color: white;
+  }
+  
+  .form-box h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-box label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  
+  .form-box input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  .form-box button {
+    width: 100%;
+    background-color: white;
+    color: #ff5722;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .form-box button:hover {
+    background-color: #ffe0b2;
+  }
+  
+  .register-link {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9em;
+  }
+  
+  .register-link a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+  
+  .error {
+    color: #ff5722;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }

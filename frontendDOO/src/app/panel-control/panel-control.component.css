@@ -1,0 +1,39 @@
+.admin-dashboard {
+    background-image: url('Imagenes/fondo-panel.jpg');
+    padding: 40px;
+    text-align: center;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .admin-dashboard h1 {
+    margin-bottom: 40px;
+    color: #ff5722;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card h3 {
+    color: #ff5722;
+    margin-bottom: 10px;
+  }
+  
