@@ -10,6 +10,5 @@ export const routes: Routes = [
     { path: 'registro-admin', component: RegistroAdminComponent },
 ];
 
-
-
 export class AppRoutingModule { }
+
