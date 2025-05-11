@@ -14,11 +14,21 @@
         <div class="form-group">
         <label>Nombre:</label>
         <input type="text" formControlName="nombre" />
-        <div class="error" *ngIf="adminForm.get('nombre')?.invalid && adminForm.get('nombre')?.touched">
-          Nombre es requerido.
+        <div class="error" *ngIf="adminForm.get('nombre')?.touched && adminForm.get('nombre')?.invalid">
+          {{ adminForm.get('nombre')?.errors?.['required'] ? 'Nombre es requerido.' : '' }}
+          {{ adminForm.get('nombre')?.errors?.['minlength'] ? 'Mínimo 2 caracteres.' : '' }}
+          {{ adminForm.get('nombre')?.errors?.['maxlength'] ? 'Máximo 100 caracteres.' : '' }}
         </div>
       </div>
-      <!Campo del Email>
+      <!Campo del Apellido>
+      <div class="form-group">
+      <label>Apellido:</label>
+      <input type="text" formControlName="Apellido" />
+      <div class="error" *ngIf="adminForm.get('Apellido')?.invalid && adminForm.get('Apellido')?.touched">
+        Apellidos es requeridos.
+      </div>
+    </div>
+      <!-- Campo del Email -->
       <div class="form-group">
         <label>Email:</label>
         <input type="email" formControlName="email" />
@@ -26,14 +36,30 @@
           Email no válido.
         </div>
       </div>
-      <!Campo del confirmar Email>
+
+      <!-- Campo Confirmar Email -->
       <div class="form-group">
         <label>Confirmar Email:</label>
-        <input type="email" formControlName="email" />
-        <div class="error" *ngIf="adminForm.get('email')?.invalid && adminForm.get('email')?.touched">
+        <input type="email" formControlName="Confiemail" />
+        <div class="error" *ngIf="adminForm.get('Confiemail')?.invalid && adminForm.get('Confiemail')?.touched">
           Email no válido.
         </div>
+        <div class = "error" *ngIf="adminForm.get('Confiemail')?.hasError('emailMismatch')">
+          Los correos electrónicos no coinciden.
+        </div>
       </div>
+
+
+
+      <!Campo del telefono>
+      <div class="form-group">
+      <label>Telefono:</label>
+      <input type="text" formControlName="Telefono" />
+      <div class="error" *ngIf="adminForm.get('Telefono')?.invalid && adminForm.get('Telefono')?.touched">
+        Telefono es requeridos.
+      </div>
+    </div>
+    
     <!Campo de la Contrasena>
       <div class="form-group">
         <label>Contraseña:</label>
