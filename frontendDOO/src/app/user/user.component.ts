@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class UserComponent {
   username = 'daniel';
-  isLoggedIn = false; // Esto esta funcionando como un state
+  isLoggedIn = true; // Esto esta funcionando como un state
   greet(){
     alert('Hola!!!')
   }
