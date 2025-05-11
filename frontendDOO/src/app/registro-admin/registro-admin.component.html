@@ -53,21 +53,34 @@
 
       <!Campo del telefono>
       <div class="form-group">
-      <label>Telefono:</label>
-      <input type="text" formControlName="Telefono" />
-      <div class="error" *ngIf="adminForm.get('Telefono')?.invalid && adminForm.get('Telefono')?.touched">
-        Telefono es requeridos.
-      </div>
-    </div>
+        <label>Teléfono:</label>
+        <input type="text" formControlName="Telefono" />
+      
+        <div class="error" *ngIf="adminForm.get('Telefono')?.invalid && adminForm.get('Telefono')?.touched">
+          <div *ngIf="adminForm.get('Telefono')?.errors?.['required']">
+            El teléfono es obligatorio.
+          </div>
+          <div *ngIf="adminForm.get('Telefono')?.errors?.['pattern']">
+            Solo se permiten números.
+          </div>
+        </div>
+      </div>      
+      
     
-    <!Campo de la Contrasena>
+      <!-- Campo Contraseña -->
       <div class="form-group">
         <label>Contraseña:</label>
         <input type="password" formControlName="password" />
         <div class="error" *ngIf="adminForm.get('password')?.invalid && adminForm.get('password')?.touched">
-          Contraseña requerida.
+          <div *ngIf="adminForm.get('password')?.errors?.['required']">
+            La contraseña es obligatoria.
+          </div>
+          <div *ngIf="adminForm.get('password')?.errors?.['pattern']">
+            La contraseña debe tener mínimo 8 caracteres, incluir mayúscula, minúscula, número y carácter especial.
+          </div>
         </div>
       </div>
+
   
       <button type="submit" [disabled]="adminForm.invalid">Registrar</button>
     </form>

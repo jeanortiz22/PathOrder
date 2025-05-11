@@ -20,8 +20,15 @@ export class RegistroAdminComponent {
       Apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       Confiemail: ['', [Validators.required, Validators.email]],
-      Telefono: ['', Validators.required],
-      password: ['', Validators.required],
+      Telefono: ['', [
+        Validators.required,
+        Validators.pattern(/^\d+$/)  // Solo números
+      ]],
+    
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_#])[A-Za-z\d@$!%*?&\-_#]{8,}$/)
+      ]],
     });
   }
 
