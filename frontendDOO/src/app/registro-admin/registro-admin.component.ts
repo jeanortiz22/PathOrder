@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
+import { RegistrarAdminService, AdminDTO } from '../services/registrar-admin.service';
 
 @Component({
   selector: 'app-registro-admin',
@@ -13,7 +14,7 @@ import { Route, Router } from '@angular/router';
 export class RegistroAdminComponent {
   adminForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router:Router) {
+  constructor(private fb: FormBuilder, private router:Router,private registroAdminService: RegistrarAdminService) {
     this.adminForm = this.fb.group({
       DI: ['', Validators.required],
       nombre: ['',[ Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
@@ -43,10 +44,27 @@ export class RegistroAdminComponent {
 
 
     if (this.adminForm.valid) {
-      console.log('Datos enviados:', this.adminForm.value);
-      this.router.navigate(['/user'])
+      const admin: AdminDTO = {
+        di: this.adminForm.value.DI,
+        nombre: this.adminForm.value.nombre,
+        apellido: this.adminForm.value.Apellido,
+        email: this.adminForm.value.email,
+        telefono: this.adminForm.value.Telefono,
+        password: this.adminForm.value.password
+      };
+
+      this.registroAdminService.registrarAdmin(admin).subscribe({
+        next: (res) => {
+          console.log('Registro exitoso:', res);
+          this.router.navigate(['/panel-control']);
+        },
+        error: (err) => {
+          console.error('Error en el registro de administrador:', err);
+        }
+      });
+
     } else {
-      console.log('datos no validos')
+      console.log('Formulario no válido');
     }
   }
 }
