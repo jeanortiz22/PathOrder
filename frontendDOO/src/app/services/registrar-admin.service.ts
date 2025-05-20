@@ -7,6 +7,7 @@ export interface AdminDTO{
   di: string;
   nombre:string;
   apellido: string;
+  usuario:string;
   email: string;
   telefono: string;
   password: string;

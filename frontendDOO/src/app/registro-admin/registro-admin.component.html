@@ -28,6 +28,17 @@
         Apellidos es requeridos.
       </div>
     </div>
+
+        <!-- Campo Usuario (Nuevo) -->
+    <div class="form-group">
+      <label>Usuario:</label>
+      <input type="text" formControlName="usuario" />
+      <div class="error" *ngIf="adminForm.get('usuario')?.invalid && adminForm.get('usuario')?.touched">
+        El usuario es requerido.
+      </div>
+    </div>
+
+
       <!-- Campo del Email -->
       <div class="form-group">
         <label>Email:</label>

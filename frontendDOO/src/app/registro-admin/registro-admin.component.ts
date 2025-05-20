@@ -19,6 +19,7 @@ export class RegistroAdminComponent {
       DI: ['', Validators.required],
       nombre: ['',[ Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
       Apellido: ['', Validators.required],
+      usuario: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       Confiemail: ['', [Validators.required, Validators.email]],
       Telefono: ['', [
@@ -48,6 +49,7 @@ export class RegistroAdminComponent {
         di: this.adminForm.value.DI,
         nombre: this.adminForm.value.nombre,
         apellido: this.adminForm.value.Apellido,
+        usuario: this.adminForm.value.usuario,
         email: this.adminForm.value.email,
         telefono: this.adminForm.value.Telefono,
         password: this.adminForm.value.password
