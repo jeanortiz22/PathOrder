@@ -12,6 +12,19 @@ import { RegistrarAdminService, AdminDTO } from '../services/registrar-admin.ser
   styleUrl: './registro-admin.component.css'
 })
 export class RegistroAdminComponent {
+
+    confirmarSalida() {
+  // Verificar si hay cambios en el formulario (dirty = modificado)
+  if (this.adminForm.dirty) {
+    const confirmacion = window.confirm('¿Estás seguro de que quieres salir? Se perderán los datos no guardados.');
+    if (confirmacion) {
+      this.router.navigate(['/panel-control']);
+    }
+  } else {
+    // Si no hay cambios, salir directamente
+    this.router.navigate(['/panel-control']);
+  }
+}
   adminForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router:Router,private registroAdminService: RegistrarAdminService) {
@@ -69,4 +82,5 @@ export class RegistroAdminComponent {
       console.log('Formulario no válido');
     }
   }
+
 }

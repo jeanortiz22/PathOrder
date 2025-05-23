@@ -1,22 +1,55 @@
 <div class="admin-dashboard">
-    <h1>Bienvenido</h1>
-    <div class="card-grid">
-      <div class="card" routerLink="/registro-admin"> <!-- Use el routerLink del registro de administradores -->
-        <h3>Registrar Administrador</h3>
-        <p>Crear una nueva cuenta de administrador.</p>
-      </div>
-      <div class="card">
-        <h3>Gestionar Productos</h3>
-        <p>Agregar, editar o eliminar productos del menú.</p>
-      </div>
-      <div class="card">
-        <h3>Ver Reservas</h3>
-        <p>Consultar las reservas realizadas por los usuarios.</p>
-      </div>
-      <div class="card">
-        <h3>Inventario</h3>
-        <p>Revisar el inventario de los productos de venta.</p>
-      </div>
-    </div>
+  <!-- HEADER CON MENÚ DE USUARIO -->
+<header class="dashboard-header">
+  <h1 class="welcome-text">Bienvenido, {{ nombreUsuario }}</h1>
+
+  <div class="user-menu">
+    <button (click)="toggleUserMenu()" class="user-icon-btn">
+  <img src="Imagenes/logoUsuario.jpg" alt="Usuario" class="user-icon-img" />
+</button>
+    <ul *ngIf="showUserMenu" class="dropdown">
+      <li><a routerLink="/user/account">Ver Cuenta</a></li>
+      <li><a routerLink="/user/edit">Modificar Cuenta</a></li>
+      <li><a href="#" (click)="logout()">Cerrar Sesión</a></li>
+    </ul>
   </div>
-  
+</header>
+
+  <!-- GRID DE TARJETAS CON EL BOTÓN “Crear nueva categoría” -->
+  <div class="card-grid">
+    <!-- Tus cards existentes... -->
+    <div class="card" routerLink="/registro-admin">
+      <h3>Registrar Administrador</h3>
+      <p>Crear una nueva cuenta de administrador.</p>
+    </div>
+    <div class="card" routerLink="/productos">
+      <h3>Gestionar Productos</h3>
+      <p>Agregar, editar o eliminar productos del menú.</p>
+    </div>
+
+    <!-- NUEVO CARD -->
+    <div class="card" routerLink="/categoria/nueva">
+      <h3>Gestionar categoria</h3>
+      <p>Agrega, elimina o modifica una categoria.</p>
+    </div>
+
+    <!-- Resto de tus cards... -->
+    <div class="card" routerLink="/reservas">
+      <h3>Ver Reservas</h3>
+      <p>Consultar las reservas realizadas por los usuarios.</p>
+    </div>
+    <div class="card" routerLink="/inventario">
+      <h3>Inventario</h3>
+      <p>Revisar el inventario de los productos de venta.</p>
+    </div>
+    <div class="card" routerLink="/reservas">
+      <h3>Ver Reservas</h3>
+      <p>Consultar las reservas realizadas por los usuarios.</p>
+    </div>
+    <div class="card" routerLink="/Historial de precios">
+      <h3>Inventario</h3>
+      <p>Consultar el historial de precios de los productos de venta.</p>
+    </div>
+
+  </div>
+
