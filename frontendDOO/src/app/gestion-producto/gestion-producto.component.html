@@ -1,0 +1,53 @@
+
+<div class="gestion-container" id="global-container">
+  <div class="gestion-container">
+    <div id="nav-container">
+       <nav>
+         <ul></ul> <!-- Pensaba agregar aqui un icono de la cafeteria o algo asi -->
+         <ul>
+           <h1>Gestion de productos</h1>
+         </ul>
+         <ul>
+           <h2>Bienvenido {{nombreUsuario}} </h2>
+         </ul>
+         <ul>
+           <button id="desplegable-button-menu" (click)="alternarMenu()">Menu</button>
+           <div class="desplegable-container" id="desplegable-container-menu" *ngIf="esMenuVisible">
+             <button (click)="gestionarReservas()">Gestionar Reservas--------------</button>
+             <h2>hola</h2>
+             <h3>2134</h3>
+             <h3>hola</h3>
+           </div>
+        </ul>
+       </nav>
+    </div>
+
+    <div>
+      <div>
+        <aside>
+
+        </aside>
+      </div>
+      <div id="productos-container">
+
+        <div id="busqueda-container-barra">
+          <form (submit)="buscarProductos($event)">
+            <input type="text" placeholder="Buscar productos..." [(ngModel)]="terminoBusqueda" name="busqueda" />
+            <button type="submit">Buscar</button>
+          </form>
+        </div>
+
+        <div>
+          <div *ngFor="let producto of productos" id="producto-container">
+            <h3>{{ producto.nombre }}</h3>
+            <p>{{ producto.precio }}</p>
+            <p>{{producto.disponibilidad}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+ </div>
+
+</div>
+
