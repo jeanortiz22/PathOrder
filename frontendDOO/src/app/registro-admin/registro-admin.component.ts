@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RegistrarAdminService, AdminDTO } from '../services/registrar-admin.service';
 
 @Component({
@@ -9,78 +9,68 @@ import { RegistrarAdminService, AdminDTO } from '../services/registrar-admin.ser
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './registro-admin.component.html',
-  styleUrl: './registro-admin.component.css'
+  styleUrls: ['./registro-admin.component.css']
 })
 export class RegistroAdminComponent {
-
-    confirmarSalida() {
-  // Verificar si hay cambios en el formulario (dirty = modificado)
-  if (this.adminForm.dirty) {
-    const confirmacion = window.confirm('¿Estás seguro de que quieres salir? Se perderán los datos no guardados.');
-    if (confirmacion) {
-      this.router.navigate(['/panel-control']);
-    }
-  } else {
-    // Si no hay cambios, salir directamente
-    this.router.navigate(['/panel-control']);
-  }
-}
   adminForm: FormGroup;
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
 
-  constructor(private fb: FormBuilder, private router:Router,private registroAdminService: RegistrarAdminService) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private registroAdminService: RegistrarAdminService
+  ) {
+    // Sin validaciones: todos los campos son opcionales en el front
     this.adminForm = this.fb.group({
-      DI: ['', Validators.required],
-      nombre: ['',[ Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
-      Apellido: ['', Validators.required],
-      usuario: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      Confiemail: ['', [Validators.required, Validators.email]],
-      Telefono: ['', [
-        Validators.required,
-        Validators.pattern(/^\d+$/)  // Solo números
-      ]],
-    
-      password: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_#])[A-Za-z\d@$!%*?&\-_#]{8,}$/)
-      ]],
+      di: [''],
+      nombre: [''],
+      apellido: [''],
+      usuario: [''],
+      correo: [''],
+      confirmacionCorreo: [true],
+      telefono: [''],
+      confirmacionTelefono: [true],
+      estadoCuenta: [true],
+      contrasena: ['']
     });
   }
 
-  onSubmit() {
-    // Verificamos si los correos electrónicos coinciden
-    if (this.adminForm.value.email !== this.adminForm.value.Confiemail) {
-      // Si no coinciden, establecemos un error en el campo 'Confiemail'
-      this.adminForm.get('Confiemail')?.setErrors({ emailMismatch: true });
-      console.log('Los correos electrónicos no coinciden.');
-      return; // Detenemos el envío del formulario
-    }
-
-
-    if (this.adminForm.valid) {
-      const admin: AdminDTO = {
-        di: this.adminForm.value.DI,
-        nombre: this.adminForm.value.nombre,
-        apellido: this.adminForm.value.Apellido,
-        usuario: this.adminForm.value.usuario,
-        email: this.adminForm.value.email,
-        telefono: this.adminForm.value.Telefono,
-        password: this.adminForm.value.password
-      };
-
-      this.registroAdminService.registrarAdmin(admin).subscribe({
-        next: (res) => {
-          console.log('Registro exitoso:', res);
-          this.router.navigate(['/panel-control']);
-        },
-        error: (err) => {
-          console.error('Error en el registro de administrador:', err);
-        }
-      });
-
+  confirmarSalida() {
+    if (this.adminForm.dirty) {
+      if (window.confirm('¿Estás seguro de que quieres salir? Se perderán los datos no guardados.')) {
+        this.router.navigate(['/panel-control']);
+      }
     } else {
-      console.log('Formulario no válido');
+      this.router.navigate(['/panel-control']);
     }
   }
 
+  onSubmit() {
+    this.mensajeExito = null;
+    this.mensajeError = null;
+
+    const dto: AdminDTO = {
+      di: this.adminForm.value.di,
+      nombre: this.adminForm.value.nombre,
+      apellido: this.adminForm.value.apellido,
+      usuario: this.adminForm.value.usuario,
+      correo: this.adminForm.value.correo,
+      confirmacionCorreo: this.adminForm.value.confirmacionCorreo,
+      telefono: this.adminForm.value.telefono,
+      confirmacionTelefono: this.adminForm.value.confirmacionTelefono,
+      estadoCuenta: this.adminForm.value.estadoCuenta,
+      contrasena: this.adminForm.value.contrasena
+    };
+
+    this.registroAdminService.registrarAdmin(dto).subscribe({
+      next: (res: string) => {
+        this.mensajeExito = res;
+        this.router.navigate(['/panel-control']);
+      },
+      error: err => {
+        this.mensajeError = err.error?.mensaje || 'Error inesperado al registrar administrador.';
+      }
+    });
+  }
 }

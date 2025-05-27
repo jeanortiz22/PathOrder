@@ -3,15 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
-export interface AdminDTO{
+export interface AdminDTO {
   di: string;
-  nombre:string;
+  nombre: string;
   apellido: string;
-  usuario:string;
-  email: string;
+  usuario: string;
+  correo: string;
+  confirmacionCorreo: boolean;
   telefono: string;
-  password: string;
-
+  confirmacionTelefono: boolean;
+  estadoCuenta: boolean;
+  contrasena: string;
 }
 
 @Injectable({
@@ -20,11 +22,13 @@ export interface AdminDTO{
 
 
 export class RegistrarAdminService {
-  private apiUrl = 'acavalURLdeelback'
+  private apiUrl = 'http://localhost:8080/api/v1/administradores'
 
   constructor(private http:HttpClient) { }
 
-  registrarAdmin(admin:AdminDTO): Observable<any>{
-    return this.http.post(this.apiUrl, admin);
+  registrarAdmin(admin:AdminDTO): Observable<string>{
+    return this.http.post<string>(this.apiUrl, admin);
   }
 }
+
+
