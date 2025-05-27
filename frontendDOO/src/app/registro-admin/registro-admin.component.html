@@ -5,7 +5,7 @@
         <!Campo de Di>
         <div class="form-group">
             <label>DI:</label>
-            <input type="text" formControlName="DI" />
+            <input type="text" formControlName="di" />
             <div class="error" *ngIf="adminForm.get('DI')?.invalid && adminForm.get('DI')?.touched">
               DI es requerido.
             </div>
@@ -23,7 +23,7 @@
       <!Campo del Apellido>
       <div class="form-group">
       <label>Apellido:</label>
-      <input type="text" formControlName="Apellido" />
+      <input type="text" formControlName="apellido" />
       <div class="error" *ngIf="adminForm.get('Apellido')?.invalid && adminForm.get('Apellido')?.touched">
         Apellidos es requeridos.
       </div>
@@ -42,7 +42,7 @@
       <!-- Campo del Email -->
       <div class="form-group">
         <label>Email:</label>
-        <input type="email" formControlName="email" />
+        <input type="email" formControlName="correo" />
         <div class="error" *ngIf="adminForm.get('email')?.invalid && adminForm.get('email')?.touched">
           Email no válido.
         </div>
@@ -51,7 +51,7 @@
       <!-- Campo Confirmar Email -->
       <div class="form-group">
         <label>Confirmar Email:</label>
-        <input type="email" formControlName="Confiemail" />
+        <input type="email" formControlName="confirmacionCorreo" />
         <div class="error" *ngIf="adminForm.get('Confiemail')?.invalid && adminForm.get('Confiemail')?.touched">
           Email no válido.
         </div>
@@ -65,7 +65,7 @@
       <!Campo del telefono>
       <div class="form-group">
         <label>Teléfono:</label>
-        <input type="text" formControlName="Telefono" />
+        <input type="text" formControlName="telefono" />
       
         <div class="error" *ngIf="adminForm.get('Telefono')?.invalid && adminForm.get('Telefono')?.touched">
           <div *ngIf="adminForm.get('Telefono')?.errors?.['required']">
@@ -81,12 +81,12 @@
       <!-- Campo Contraseña -->
       <div class="form-group">
         <label>Contraseña:</label>
-        <input type="password" formControlName="password" />
+        <input type="password" formControlName="contrasena" />
         <div class="error" *ngIf="adminForm.get('password')?.invalid && adminForm.get('password')?.touched">
           <div *ngIf="adminForm.get('password')?.errors?.['required']">
             La contraseña es obligatoria.
           </div>
-          <div *ngIf="adminForm.get('password')?.errors?.['pattern']">
+          <div *ngIf="adminForm.get('contrasena')?.errors?.['pattern']">
             La contraseña debe tener mínimo 8 caracteres, incluir mayúscula, minúscula, número y carácter especial.
           </div>
         </div>
@@ -96,6 +96,10 @@
       <button type="submit" [disabled]="adminForm.invalid">Registrar</button>
     </form>
   </div>
+      <button type="button" class="volver-btn" (click)="confirmarSalida()">Volver</button>
+
+
+
 
 
  

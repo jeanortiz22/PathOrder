@@ -17,12 +17,13 @@
     gap: 30px;
     padding: 0 20px;
   }
-  
+
   .card {
     background-color: white;
-    border-radius: 12px;
+    border-radius: 5px;
+    border-radius: 40px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-    padding: 25px;
+    padding: 2px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -37,3 +38,61 @@
     margin-bottom: 10px;
   }
   
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  margin-bottom: 40px;
+}
+
+.welcome-text {
+    font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  color: #ff5722;
+  font-weight: 700;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-menu button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.user-menu .dropdown {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  list-style: none;
+  padding: 10px;
+  margin-top: 5px;
+  width: 150px;
+  text-align: left;
+  z-index: 100;
+}
+
+.user-menu .dropdown li {
+  margin: 5px 0;
+}
+
+.user-menu .dropdown a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.user-menu .dropdown a:hover {
+  color: #ff5722;
+}
