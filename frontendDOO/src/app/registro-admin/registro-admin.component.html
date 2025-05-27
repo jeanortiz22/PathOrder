@@ -6,7 +6,7 @@
         <div class="form-group">
             <label>DI:</label>
             <input type="text" formControlName="di" />
-            <div class="error" *ngIf="adminForm.get('DI')?.invalid && adminForm.get('DI')?.touched">
+            <div class="error" *ngIf="adminForm.get('di')?.invalid && adminForm.get('di')?.touched">
               DI es requerido.
             </div>
           </div>
@@ -24,7 +24,7 @@
       <div class="form-group">
       <label>Apellido:</label>
       <input type="text" formControlName="apellido" />
-      <div class="error" *ngIf="adminForm.get('Apellido')?.invalid && adminForm.get('Apellido')?.touched">
+      <div class="error" *ngIf="adminForm.get('apellido')?.invalid && adminForm.get('apellido')?.touched">
         Apellidos es requeridos.
       </div>
     </div>
@@ -43,22 +43,11 @@
       <div class="form-group">
         <label>Email:</label>
         <input type="email" formControlName="correo" />
-        <div class="error" *ngIf="adminForm.get('email')?.invalid && adminForm.get('email')?.touched">
+        <div class="error" *ngIf="adminForm.get('correo')?.invalid && adminForm.get('correo')?.touched">
           Email no válido.
         </div>
       </div>
 
-      <!-- Campo Confirmar Email -->
-      <div class="form-group">
-        <label>Confirmar Email:</label>
-        <input type="email" formControlName="confirmacionCorreo" />
-        <div class="error" *ngIf="adminForm.get('Confiemail')?.invalid && adminForm.get('Confiemail')?.touched">
-          Email no válido.
-        </div>
-        <div class = "error" *ngIf="adminForm.get('Confiemail')?.hasError('emailMismatch')">
-          Los correos electrónicos no coinciden.
-        </div>
-      </div>
 
 
 
@@ -67,11 +56,11 @@
         <label>Teléfono:</label>
         <input type="text" formControlName="telefono" />
       
-        <div class="error" *ngIf="adminForm.get('Telefono')?.invalid && adminForm.get('Telefono')?.touched">
-          <div *ngIf="adminForm.get('Telefono')?.errors?.['required']">
+        <div class="error" *ngIf="adminForm.get('telefono')?.invalid && adminForm.get('telefono')?.touched">
+          <div *ngIf="adminForm.get('telefono')?.errors?.['required']">
             El teléfono es obligatorio.
           </div>
-          <div *ngIf="adminForm.get('Telefono')?.errors?.['pattern']">
+          <div *ngIf="adminForm.get('telefono')?.errors?.['pattern']">
             Solo se permiten números.
           </div>
         </div>
@@ -82,14 +71,22 @@
       <div class="form-group">
         <label>Contraseña:</label>
         <input type="password" formControlName="contrasena" />
-        <div class="error" *ngIf="adminForm.get('password')?.invalid && adminForm.get('password')?.touched">
-          <div *ngIf="adminForm.get('password')?.errors?.['required']">
+        <div class="error" *ngIf="adminForm.get('contrasena')?.invalid && adminForm.get('contrasena')?.touched">
+          <div *ngIf="adminForm.get('contrasena')?.errors?.['required']">
             La contraseña es obligatoria.
           </div>
           <div *ngIf="adminForm.get('contrasena')?.errors?.['pattern']">
             La contraseña debe tener mínimo 8 caracteres, incluir mayúscula, minúscula, número y carácter especial.
           </div>
         </div>
+      </div>
+      <div *ngIf="mensajeExito" class="alert alert-success">
+        {{ mensajeExito }}
+      </div>
+
+
+      <div *ngIf="mensajeError" class="alert alert-danger">
+          {{ mensajeError }}
       </div>
 
   

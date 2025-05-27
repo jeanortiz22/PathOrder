@@ -26,9 +26,11 @@ export class RegistrarAdminService {
 
   constructor(private http:HttpClient) { }
 
-  registrarAdmin(admin:AdminDTO): Observable<string>{
-    return this.http.post<string>(this.apiUrl, admin);
+  registrarAdmin(admin: AdminDTO): Observable<any> {
+    return this.http.post(this.apiUrl, admin, { responseType: 'text' as 'json' });
   }
+
+
 }
 
 

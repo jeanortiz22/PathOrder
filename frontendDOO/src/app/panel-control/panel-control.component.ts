@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./panel-control.component.css'],
 })
 export class PanelControlComponent {
-  nombreUsuario: string = 'Ivan Daniel Naranjo';
+  nombreUsuario: string = 'Administrador';
   // Control para mostrar/ocultar el menú de usuario
   showUserMenu = false;
 

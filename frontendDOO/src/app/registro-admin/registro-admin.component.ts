@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RegistrarAdminService, AdminDTO } from '../services/registrar-admin.service';
@@ -28,13 +28,11 @@ export class RegistroAdminComponent {
       apellido: [''],
       usuario: [''],
       correo: [''],
-      confirmacionCorreo: [true],
       telefono: [''],
-      confirmacionTelefono: [true],
-      estadoCuenta: [true],
       contrasena: ['']
     });
   }
+
 
   confirmarSalida() {
     if (this.adminForm.dirty) {
@@ -47,30 +45,67 @@ export class RegistroAdminComponent {
   }
 
   onSubmit() {
-    this.mensajeExito = null;
+  this.mensajeExito = null;
+  this.mensajeError = null;
+
+  const dto: AdminDTO = {
+    di: this.adminForm.value.di,
+    nombre: this.adminForm.value.nombre,
+    apellido: this.adminForm.value.apellido,
+    usuario: this.adminForm.value.usuario,
+    correo: this.adminForm.value.correo,
+    confirmacionCorreo: false,
+    telefono: this.adminForm.value.telefono,
+    confirmacionTelefono: false,
+    estadoCuenta: false,
+    contrasena: this.adminForm.value.contrasena
+  };
+
+  this.registroAdminService.registrarAdmin(dto).subscribe({
+  next: (res: any) => {
+    if (typeof res === 'string') {
+      this.mensajeExito = res;
+    } else if (res?.mensaje) {
+      this.mensajeExito = res.mensaje;
+    } else {
+      this.mensajeExito = 'Administrador registrado con éxito.';
+    }
     this.mensajeError = null;
 
-    const dto: AdminDTO = {
-      di: this.adminForm.value.di,
-      nombre: this.adminForm.value.nombre,
-      apellido: this.adminForm.value.apellido,
-      usuario: this.adminForm.value.usuario,
-      correo: this.adminForm.value.correo,
-      confirmacionCorreo: this.adminForm.value.confirmacionCorreo,
-      telefono: this.adminForm.value.telefono,
-      confirmacionTelefono: this.adminForm.value.confirmacionTelefono,
-      estadoCuenta: this.adminForm.value.estadoCuenta,
-      contrasena: this.adminForm.value.contrasena
-    };
+    this.adminForm.reset({ estadoCuenta: false });
 
-    this.registroAdminService.registrarAdmin(dto).subscribe({
-      next: (res: string) => {
-        this.mensajeExito = res;
-        this.router.navigate(['/panel-control']);
-      },
-      error: err => {
-        this.mensajeError = err.error?.mensaje || 'Error inesperado al registrar administrador.';
-      }
-    });
+    setTimeout(() => {
+      this.mensajeExito = null;
+      this.router.navigate(['/panel-control']); // <--- redirección aquí
+    }, 3000);
+  },
+error: err => {
+  console.error('Error recibido del backend:', err);
+
+  // Caso 1: viene ya como objeto JSON
+  if (err?.error?.mensaje) {
+    this.mensajeError = err.error.mensaje;
   }
+
+  // Caso 2: viene como string JSON plano -> hay que parsearlo
+  else if (typeof err?.error === 'string') {
+    try {
+      const parsed = JSON.parse(err.error);
+      this.mensajeError = parsed.mensaje || 'Ocurrió un error.';
+    } catch (e) {
+      this.mensajeError = err.error; // texto plano no JSON
+    }
+  }
+
+  // Caso 3: fallback
+  else {
+    this.mensajeError = 'Error inesperado al registrar administrador.';
+  }
+
+  this.mensajeExito = null;
+}
+
+});
+
+}
 }
