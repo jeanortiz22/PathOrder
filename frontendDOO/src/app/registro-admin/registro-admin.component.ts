@@ -28,7 +28,14 @@ export class RegistroAdminComponent {
       apellido: [''],
       usuario: [''],
       correo: [''],
+<<<<<<< HEAD
       telefono: [''],
+=======
+      confirmacionCorreo: [''],
+      telefono: [''],
+      confirmacionTelefono: [''],
+      estadoCuenta: [false],
+>>>>>>> 830bec7 (Se cambia ruta principal)
       contrasena: ['']
     });
   }
