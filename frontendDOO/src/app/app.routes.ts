@@ -6,7 +6,7 @@ import {GestionProductoComponent} from './gestion-producto/gestion-producto.comp
 import { CategoriasComponent } from './categorias/categorias.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'InicioSesion', pathMatch: 'full' },
+    { path: '', redirectTo: 'panel-control', pathMatch: 'full' },
     { path: 'InicioSesion', component: InicioSesionComponent },
     { path: 'panel-control', component: PanelControlComponent },
     { path: 'registro-admin', component: RegistroAdminComponent },
