@@ -5,7 +5,7 @@
         <!Campo de Di>
         <div class="form-group">
             <label>DI:</label>
-            <input type="text" formControlName="di" class="form-control" maxlength="10" (input)="soloNumeros($event)" />
+            <input type="text" formControlName="di" class="form-control" maxlength="10" (input)="soloNumeros($event, 'di')" />
             <div class="error" *ngIf="adminForm.get('di')?.invalid && adminForm.get('di')?.touched">
               DI es requerido.
             </div>
@@ -13,7 +13,7 @@
       <!Campo del Nombre>
         <div class="form-group">
         <label>Nombre:</label>
-        <input type="text" formControlName="nombre" />
+        <input type="text" formControlName="nombre" maxlength="50" (input)="soloLetras($event, 'nombre')" />
         <div class="error" *ngIf="adminForm.get('nombre')?.touched && adminForm.get('nombre')?.invalid">
           {{ adminForm.get('nombre')?.errors?.['required'] ? 'Nombre es requerido.' : '' }}
           {{ adminForm.get('nombre')?.errors?.['minlength'] ? 'Mínimo 2 caracteres.' : '' }}
@@ -23,7 +23,7 @@
       <!Campo del Apellido>
       <div class="form-group">
       <label>Apellido:</label>
-      <input type="text" formControlName="apellido" />
+      <input type="text" formControlName="apellido" maxlength="50" (input)="soloLetras($event, 'apellido')" />
       <div class="error" *ngIf="adminForm.get('apellido')?.invalid && adminForm.get('apellido')?.touched">
         Apellidos es requeridos.
       </div>
@@ -32,7 +32,7 @@
         <!-- Campo Usuario (Nuevo) -->
     <div class="form-group">
       <label>Usuario:</label>
-      <input type="text" formControlName="usuario" />
+      <input type="text" formControlName="usuario" maxlength="50" (input)="soloLetras($event, 'usuario')"/>
       <div class="error" *ngIf="adminForm.get('usuario')?.invalid && adminForm.get('usuario')?.touched">
         El usuario es requerido.
       </div>
@@ -42,19 +42,16 @@
       <!-- Campo del Email -->
       <div class="form-group">
         <label>Email:</label>
-        <input type="email" formControlName="correo" />
+        <input type="email" formControlName="correo"  maxlength="200"/>
         <div class="error" *ngIf="adminForm.get('correo')?.invalid && adminForm.get('correo')?.touched">
           Email no válido.
         </div>
       </div>
 
-
-
-
       <!Campo del telefono>
       <div class="form-group">
         <label>Teléfono:</label>
-        <input type="text" formControlName="telefono" />
+        <input type="text" formControlName="telefono" maxlength="10" (input)="soloNumeros($event, 'telefono')" />
       
         <div class="error" *ngIf="adminForm.get('telefono')?.invalid && adminForm.get('telefono')?.touched">
           <div *ngIf="adminForm.get('telefono')?.errors?.['required']">
@@ -68,9 +65,10 @@
       
     
       <!-- Campo Contraseña -->
+    <!Campo de la Contrasena>
       <div class="form-group">
         <label>Contraseña:</label>
-        <input type="password" formControlName="contrasena" />
+        <input type="password" formControlName="contrasena"  maxlength="100"/>
         <div class="error" *ngIf="adminForm.get('contrasena')?.invalid && adminForm.get('contrasena')?.touched">
           <div *ngIf="adminForm.get('contrasena')?.errors?.['required']">
             La contraseña es obligatoria.
@@ -80,6 +78,21 @@
           </div>
         </div>
       </div>
+          <!Campo de confimar la Contrasena>
+      <div class="form-group">
+        <label>Confirmar Contraseña:</label>
+        <input type="password" formControlName="confirmarContrasena" maxlength="100" />
+        <div class="error" *ngIf="(adminForm.get('confirmarContrasena')?.touched || adminForm.hasError('contrasenasNoCoinciden'))">
+          <div *ngIf="adminForm.get('confirmarContrasena')?.errors?.['required']">
+        
+          </div>
+          <div *ngIf="adminForm.hasError('contrasenasNoCoinciden')">
+            Las contraseñas no coinciden.
+          </div>
+        </div>
+      </div>
+
+
       <div *ngIf="mensajeExito" class="alert alert-success">
         {{ mensajeExito }}
       </div>

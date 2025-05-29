@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RegistrarAdminService, AdminDTO } from '../services/registrar-admin.service';
 
+
+
 @Component({
   selector: 'app-registro-admin',
   standalone: true,
@@ -16,6 +18,7 @@ export class RegistroAdminComponent {
   mensajeExito: string | null = null;
   mensajeError: string | null = null;
 
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -23,22 +26,28 @@ export class RegistroAdminComponent {
   ) {
     // Sin validaciones: todos los campos son opcionales en el front
     this.adminForm = this.fb.group({
-      di: ['',[Validators.maxLength(10)]],
-      nombre: [''],
-      apellido: [''],
-      usuario: [''],
-      correo: [''],
-<<<<<<< HEAD
-      telefono: [''],
-=======
-      confirmacionCorreo: [''],
-      telefono: [''],
-      confirmacionTelefono: [''],
+      di: ['', [Validators.required]],
+      nombre: ['', [Validators.required]],
+      apellido: ['', Validators.required],
+      usuario: ['', Validators.required],
+      correo: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      confirmacionCorreo: [false],
+      confirmacionTelefono: [false],
       estadoCuenta: [false],
->>>>>>> 830bec7 (Se cambia ruta principal)
-      contrasena: ['']
-    });
+      contrasena: ['', [
+        Validators.required]],
+      confirmarContrasena: ['', Validators.required]
+    }, { validators: this.contrasenasIgualesValidator });
   }
+
+  // Validador a nivel de FormGroup
+  contrasenasIgualesValidator(form: FormGroup) {
+    const pass = form.get('contrasena')?.value;
+    const confirm = form.get('confirmarContrasena')?.value;
+    return pass === confirm ? null : { contrasenasNoCoinciden: true };
+  }
+
 
 
   confirmarSalida() {
@@ -51,13 +60,23 @@ export class RegistroAdminComponent {
     }
   }
 
-
-  soloNumeros(event: Event): void {
+  //solo se deja ingresar numeros
+soloNumeros(event: Event, campo: 'di' | 'telefono'): void {
   const input = event.target as HTMLInputElement;
   const soloNumeros = input.value.replace(/[^0-9]/g, '');
   input.value = soloNumeros;
-  this.adminForm.get('di')?.setValue(soloNumeros, { emitEvent: false });
+  this.adminForm.get(campo)?.setValue(soloNumeros, { emitEvent: false });
 }
+
+//solo deja ingresar letras y espacios 
+soloLetras(event: Event, campo: 'nombre' | 'apellido' | 'usuario'): void {
+  const input = event.target as HTMLInputElement;
+  const soloLetras = input.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');
+  input.value = soloLetras;
+  this.adminForm.get(campo)?.setValue(soloLetras, { emitEvent: false });
+}
+
+
 
 
   onSubmit() {
