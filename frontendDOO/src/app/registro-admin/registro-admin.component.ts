@@ -23,7 +23,7 @@ export class RegistroAdminComponent {
   ) {
     // Sin validaciones: todos los campos son opcionales en el front
     this.adminForm = this.fb.group({
-      di: [''],
+      di: ['',[Validators.maxLength(10)]],
       nombre: [''],
       apellido: [''],
       usuario: [''],
@@ -50,6 +50,15 @@ export class RegistroAdminComponent {
       this.router.navigate(['/panel-control']);
     }
   }
+
+
+  soloNumeros(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const soloNumeros = input.value.replace(/[^0-9]/g, '');
+  input.value = soloNumeros;
+  this.adminForm.get('di')?.setValue(soloNumeros, { emitEvent: false });
+}
+
 
   onSubmit() {
   this.mensajeExito = null;
@@ -106,7 +115,7 @@ error: err => {
 
   // Caso 3: fallback
   else {
-    this.mensajeError = 'Error inesperado al registrar administrador.';
+    this.mensajeError = 'Error inesperado al registrar administrador contacte con el servidor por favor .';
   }
 
   this.mensajeExito = null;

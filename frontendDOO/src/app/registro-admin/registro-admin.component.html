@@ -5,7 +5,7 @@
         <!Campo de Di>
         <div class="form-group">
             <label>DI:</label>
-            <input type="text" formControlName="di" />
+            <input type="text" formControlName="di" class="form-control" maxlength="10" (input)="soloNumeros($event)" />
             <div class="error" *ngIf="adminForm.get('di')?.invalid && adminForm.get('di')?.touched">
               DI es requerido.
             </div>
