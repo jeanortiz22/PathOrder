@@ -4,14 +4,16 @@ import { RegistroAdminComponent } from './registro-admin/registro-admin.componen
 import { PanelControlComponent } from './panel-control/panel-control.component';
 import {GestionProductoComponent} from './gestion-producto/gestion-producto.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'panel-control', pathMatch: 'full' },
+    { path: '', redirectTo: 'InicioSesion', pathMatch: 'full' },
     { path: 'InicioSesion', component: InicioSesionComponent },
     { path: 'panel-control', component: PanelControlComponent },
     { path: 'registro-admin', component: RegistroAdminComponent },
     { path: 'gestion-producto', component: GestionProductoComponent },
-    { path: 'categorias', component: CategoriasComponent }
+    { path: 'categorias', component: CategoriasComponent },
+    { path: 'registro-cliente', component: RegistroClienteComponent }
 
 ];
 

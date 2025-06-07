@@ -23,13 +23,21 @@
           #password
         />
             
-        <button type="button" (click)="onInicioSesion(email.value, password.value)">Iniciar Sesión</button>
+      <button type="button" (click)="onInicioSesion(email.value, password.value)">
+        Iniciar Sesión
+      </button>
 
+      <!-- Mensaje de error -->
+      <div *ngIf="mensajeError" class="error">
+        {{ mensajeError }}
+      </div>
 
+        <!-- 
         <p class="register-link">
           ¿No tienes cuenta?
-          <a routerLink="/registro">Regístrate aquí</a> <!-- Usa routerLink -->
+          <a routerLink="/registro">Regístrate aquí</a> 
         </p>
+        -->
       </form>
     </div>
   </div>

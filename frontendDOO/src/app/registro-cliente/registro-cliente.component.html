@@ -1,0 +1,99 @@
+<div class="registro-container">
+  <h2>Registro de Cliente</h2>
+
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <!-- Campo DI -->
+    <div class="form-group">
+      <label>DI:</label>
+      <input type="text" formControlName="di" class="form-control" maxlength="10" (input)="soloNumeros($event, 'di')" />
+      <div class="error" *ngIf="clienteForm.get('di')?.invalid && clienteForm.get('di')?.touched">
+        DI es requerido.
+      </div>
+    </div>
+
+    <!-- Campo Nombre -->
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input type="text" formControlName="nombre" maxlength="50" (input)="soloLetras($event, 'nombre')" />
+      <div class="error" *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.invalid">
+        {{ clienteForm.get('nombre')?.errors?.['required'] ? 'Nombre es requerido.' : '' }}
+        {{ clienteForm.get('nombre')?.errors?.['minlength'] ? 'Mínimo 2 caracteres.' : '' }}
+        {{ clienteForm.get('nombre')?.errors?.['maxlength'] ? 'Máximo 100 caracteres.' : '' }}
+      </div>
+    </div>
+
+    <!-- Campo Apellido -->
+    <div class="form-group">
+      <label>Apellido:</label>
+      <input type="text" formControlName="apellido" maxlength="50" (input)="soloLetras($event, 'apellido')" />
+      <div class="error" *ngIf="clienteForm.get('apellido')?.invalid && clienteForm.get('apellido')?.touched">
+        Apellido es requerido.
+      </div>
+    </div>
+
+    <!-- Campo Email -->
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="correo" maxlength="200" ngModel email />
+      <div class="error" *ngIf="clienteForm.get('correo')?.invalid && clienteForm.get('correo')?.touched">
+        Email no válido.
+      </div>
+    </div>
+
+    <!-- Campo Teléfono -->
+    <div class="form-group">
+      <label>Teléfono:</label>
+      <input type="text" formControlName="telefono" maxlength="10" (input)="soloNumeros($event, 'telefono')" />
+      <div class="error" *ngIf="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched">
+        <div *ngIf="clienteForm.get('telefono')?.errors?.['required']">
+          El teléfono es obligatorio.
+        </div>
+        <div *ngIf="clienteForm.get('telefono')?.errors?.['pattern']">
+          Solo se permiten números.
+        </div>
+      </div>
+    </div>
+
+    <!-- Campo Contraseña -->
+    <div class="form-group">
+      <label>Contraseña:</label>
+      <input type="password" formControlName="contrasena" maxlength="100" />
+      <div class="error" *ngIf="clienteForm.get('contrasena')?.invalid && clienteForm.get('contrasena')?.touched">
+        <div *ngIf="clienteForm.get('contrasena')?.errors?.['required']">
+          La contraseña es obligatoria.
+        </div>
+        <div *ngIf="clienteForm.get('contrasena')?.errors?.['pattern']">
+          La contraseña debe tener mínimo 8 caracteres, incluir mayúscula, minúscula, número y carácter especial.
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div class="form-group">
+      <label>Confirmar Contraseña:</label>
+      <input type="password" formControlName="confirmarContrasena" maxlength="100" />
+      <div class="error" *ngIf="(clienteForm.get('confirmarContrasena')?.touched || clienteForm.hasError('contrasenasNoCoinciden'))">
+        <div *ngIf="clienteForm.get('confirmarContrasena')?.errors?.['required']">
+          Confirmación requerida.
+        </div>
+        <div *ngIf="clienteForm.hasError('contrasenasNoCoinciden')">
+          Las contraseñas no coinciden.
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div *ngIf="mensajeExito" class="alert alert-success">
+      {{ mensajeExito }}
+    </div>
+
+    <div *ngIf="mensajeError" class="alert alert-danger">
+      {{ mensajeError }}
+    </div>
+
+    <!-- Botón Registrar -->
+    <button type="submit" [disabled]="clienteForm.invalid">Registrar</button>
+  </form>
+
+  <button type="button" class="volver-btn" (click)="confirmarSalida()">Volver</button>
+</div>
