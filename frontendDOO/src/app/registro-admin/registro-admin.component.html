@@ -42,7 +42,7 @@
       <!-- Campo del Email -->
       <div class="form-group">
         <label>Email:</label>
-        <input type="email" formControlName="correo"  maxlength="200"/>
+        <input type="email" formControlName="correo"  maxlength="200"  ngModel email=""/>
         <div class="error" *ngIf="adminForm.get('correo')?.invalid && adminForm.get('correo')?.touched">
           Email no válido.
         </div>
